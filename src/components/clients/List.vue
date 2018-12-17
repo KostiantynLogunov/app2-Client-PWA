@@ -12,7 +12,8 @@
                         <button class="btn btn-info"
                                 v-on:click="submitFile()"
                                 :disabled="!sendFile"
-                        >Submit</button>
+                        ><i class="fas fa-spinner fa-spin" v-if="sendingFile"></i>
+                            Submit</button>
                     </div>
                 </div>
                 <div class="col-6">
@@ -85,7 +86,12 @@
             <tbody>
                 <template v-if="!clients.length">
                     <tr>
-                        <td colspan="4" class="text-center">No customers Available</td>
+                        <td colspan="4" class="text-center" v-if="$store.getters.getProcessing">
+                            Loading... <i class="fas fa-spinner fa-spin"></i>
+                        </td>
+                        <td colspan="4" class="text-center" v-else>
+                            No customers Available
+                        </td>
                     </tr>
                 </template>
                 <template v-else>
@@ -209,6 +215,7 @@
                 client_contacts: false,
                 file: '',
                 sendFile: false,
+                sendingFile: false,
                 message: null,
 
                 errorsFormServer: []
@@ -229,7 +236,8 @@
             {
                 let formData = new FormData();
                 formData.append('file', this.file);
-
+                this.sendFile = false;
+                this.sendingFile = true;
                 axios.post(config.apiUrl+ '/file',
                     formData,
                     {
@@ -238,12 +246,43 @@
                             'Content-Type': 'multipart/form-data'
                         }
                     }
-                ).then(function(){
+                ).then((response) => {
                     this.file = '';
-                    console.log('SUCCESS!!');
+                    this.$store.dispatch('getClients');
+                    $( "#file" ).val("");
+                    this.$toasted.success(
+                        response.data.success, {
+                            duration: 5000,
+                            // you can pass a single action as below
+                            action : [
+                                {
+                                    text : 'Cancel',
+                                    onClick : (e, toastObject) => {
+                                        toastObject.goAway(0);
+                                    }
+                                },
+                            ]
+                        });
+                    this.$toasted.error(
+                        response.data.failure, {
+                            duration: 5000,
+                            // you can pass a single action as below
+                            action : [
+                                {
+                                    text : 'Cancel',
+                                    onClick : (e, toastObject) => {
+                                        toastObject.goAway(0);
+                                    }
+                                },
+                            ]
+                        });
                 })
                     .catch(function(){
                         console.log('FAILURE!!');
+                    })
+                    .finally(() => {
+                        this.sendFile = true;
+                        this.sendingFile = false;
                     });
             },
 
@@ -259,7 +298,7 @@
                     this.sendFile = false;
                     this.message = "You can upload only CVS format"
                 }
-                console.log(this.file.type);
+                // console.log(this.file.type);
             },
 
             UpdateClient()
@@ -331,6 +370,8 @@
                             .then((response) => {
                                 this.$store.dispatch('getClients');
                                 $('#exampleModalCenter').modal('hide');
+                                this.new_client.first_name = null;
+                                this.new_client.email = null;
                             })
                             .catch((err) => {
                                 this.errorsFormServer = err.response.data.errors;

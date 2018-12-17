@@ -15,9 +15,13 @@ export const store = new Vuex.Store({
         isLoggedIn: !!user,
         loading: false,
         auth_error: null,
-        clients: []
+        clients: [],
+        processing: false
     },
     getters: {
+        getProcessing(state) {
+            return state.processing;
+        },
         isLoading(state){
             return state.loading;
         },
@@ -58,6 +62,9 @@ export const store = new Vuex.Store({
         },
         updateClients(state, payload) {
             state.clients = payload;
+        },
+        setProcessing(state, payload) {
+            state.processing = payload;
         }
     },
     actions: {
@@ -65,6 +72,7 @@ export const store = new Vuex.Store({
             store.commit('login');
         },
         getClients(store) {
+            store.commit('setProcessing', true);
             axios.get(config.apiUrl + '/clients', {
                 headers: {
                     "Authorization": `Bearer ${ store.state.currentUser.token }`
@@ -76,6 +84,9 @@ export const store = new Vuex.Store({
                 .catch((err) => {
                     reject("Wrong email or password");
                 })
+                .finally(() => {
+                    store.commit('setProcessing', false);
+                });
         }
     }
 });

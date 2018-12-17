@@ -283,10 +283,8 @@
 
 <style scoped>
     .errors{
-        /*background: lightcoral;*/
         color: orangered;
         border-radius: 5px;
-        /*padding: 21px 0 2px 0;*/
     }
 
     .butt{
@@ -304,6 +302,5 @@
     }
     .user-info {
         flex: 3;
-        /*overflow-x: scroll;*/
     }
 </style>

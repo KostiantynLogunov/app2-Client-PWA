@@ -13,7 +13,6 @@
 								   class="form-control"
 								   placeholder="Enter your name"
 								   id="name"
-								   v-validate="'required|alpha_num|min: 3|max: 26'"
 								   required
 							>
 						</div>
@@ -26,7 +25,6 @@
 								   class="form-control"
 								   placeholder="Enter you Email"
 								   id="email"
-								   v-validate="'required|email|min: 6|max: 40'"
 								   required
 							>
 						</div>
@@ -38,7 +36,6 @@
 								   class="form-control"
 								   placeholder="Enter a password"
 								   id="password"
-								   v-validate="'required|alpha_num|min: 6|max: 40'"
 								   required
 								   ref="password"
 							>
@@ -51,7 +48,6 @@
 								   class="form-control"
 								   placeholder="Password, Again"
 								   id="password_confirmation"
-								   v-validate="'required|confirmed:password|alpha_num|min: 6|max: 40'"
 								   data-vv-as="password"
 								   required
 							>

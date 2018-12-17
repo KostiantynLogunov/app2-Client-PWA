@@ -5,7 +5,9 @@ import { store } from "./store/index";
 import { router } from "./routes";
 import {initialize} from './helpers/general'
 import VeeValidate from 'vee-validate';
+import Toasted from 'vue-toasted';
 
+Vue.use(Toasted);
 Vue.use(VeeValidate);
 initialize(store, router);
 

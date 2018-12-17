@@ -7,7 +7,7 @@ Vue.use(VueAxios, axios);
 
 export function login(credentials) {
     return new Promise((resolve, reject) => {
-        axios.post(config.apiUrlLogin, credentials)
+        axios.post(config.apiUrl+ '/auth/login', credentials)
             .then((response) => {
                 resolve(response.data);
             })
