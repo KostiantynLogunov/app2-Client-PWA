@@ -37,14 +37,22 @@ go to REST api's repository [RESTful api Backend](https://github.com/KostiantynL
 # then if you have good .env with correct settings, create basic tables in you DataBase
     php artisan migrate
     
-#   php artisan key:generate
+# generate key for app
+    php artisan key:generate
 
-#  For work of front app client and rest api i used JWT. Generate a new secret of jwt:
+# For work of front app client and rest api i used JWT. Generate a new secret of jwt:
     php artisan jwt:secret
     
 # Clear cache
     php artisan config:clear
     php artisan cache:clear
+    
+# If you don't have a workin domain for backend app you can launch backend app in such a way:  
+    php artisan serve
+#        or
+    php artisan serve --port=9000
+#        --port=9000 - for set server port
+#   but then dont forget set correct domain in config.js of Frontend app !!! 
 ```
-##System is ready to work !
+## System is ready to work !
 
