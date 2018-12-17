@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from './components/Home'
 import Login from './components/auth/Login'
+import Register from './components/auth/Registration'
 import ClientsMain from './components/clients/Main'
 import ClientsList from './components/clients/List'
 import NewClient from './components/clients/New'
@@ -16,6 +17,10 @@ const routes = [
         meta: {
             requiresAuth: true
         }
+    },
+    {
+        path: '/register',
+        component: Register
     },
     {
         path: '/login',
