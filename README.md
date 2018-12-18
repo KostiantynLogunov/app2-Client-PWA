@@ -2,7 +2,6 @@
 
 > A Vue.js project
 
-## Build Setup
 
 ``` bash
 # clone project from my repository
