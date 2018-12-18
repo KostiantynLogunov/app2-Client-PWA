@@ -266,7 +266,7 @@
             getClientInfo(){
                 axios.get(config.apiUrl + `/clients/${this.$route.params.id}`, {
                     headers: {
-                        "Authorization": `Bearer ${ this.$store.getters.currentUser.token }`
+                        "Authorization": `Bearer ${ this.$store.getters.currentUser.token }`,
                     }
                 })
                     .then((response) => {

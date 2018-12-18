@@ -5,7 +5,6 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Registration'
 import ClientsMain from './components/clients/Main'
 import ClientsList from './components/clients/List'
-import NewClient from './components/clients/New'
 import Client from './components/clients/View'
 
 Vue.use(VueRouter);
@@ -36,10 +35,6 @@ const routes = [
             {
                 path: '/',
                 component: ClientsList
-            },
-            {
-                path: 'new',
-                component: NewClient
             },
             {
                 path: ':id',

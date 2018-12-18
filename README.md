@@ -56,3 +56,4 @@ go to REST api's repository [RESTful api Backend](https://github.com/KostiantynL
 ```
 ## System is ready to work !
 
+## For start You must register a new user and than work with client and contacts. You may it in Frontend app client.
